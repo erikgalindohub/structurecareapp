@@ -1,5 +1,6 @@
+
 ````markdown
-# structurecareapp
+structurecareapp
 
 A modern web app for managing and generating client-facing **softscape care guides**.
 
