@@ -1,45 +1,51 @@
-StructureCareApp
 
-A web platform for managing and generating client-facing softscape care guides.
+# StructureCareApp
 
-Features
+A modern web app for managing and generating client-facing softscape care guides.
 
-Firebase Auth (anonymous), Firestore
+---
 
-Google Sheet (TSV) as plant data source
+## Features
 
-Planned Firebase Functions for PDF generation
+* Firebase Auth (anonymous), Firestore
+* Google Sheet (TSV) as plant data source
+* Planned Firebase Functions for PDF generation
 
-Prerequisites
+---
 
-Node.js (v18+ recommended) and npm
+## Setup
 
-Firebase CLI (npm i -g firebase-tools) and logged in with firebase login
+* **Node.js** (v18+ recommended) and **npm**
+* **Firebase CLI** (`npm i -g firebase-tools`) and login with `firebase login`
 
-Local Development
+---
 
-Clone repository:
-git clone https://github.com/erikgalindohub/structurecareapp.git
-cd structurecareapp
+## Development
 
-Install dependencies:
-npm install
+1. Clone this repo
+   `git clone https://github.com/erikgalindohub/structurecareapp.git`
+   `cd structurecareapp`
 
-Start development server:
-npm start
+2. Install dependencies
+   `npm install`
 
-The app will open at http://localhost:3000
+3. Run locally
+   `npm start`
 
-Build & Deploy (Firebase Hosting)
+Your app will open at [http://localhost:3000](http://localhost:3000)
 
-Build the production bundle:
-npm run build
+---
 
-Deploy to Firebase Hosting:
-firebase deploy
+## Deploy
 
-Your app will be live at:
+1. Build for production
+   `npm run build`
 
-https://structurecareapp.web.app
+2. Deploy to Firebase Hosting
+   `firebase deploy`
 
-https://structurecareapp.firebaseapp.com
+Live URLs:
+
+* [https://structurecareapp.web.app](https://structurecareapp.web.app)
+* [https://structurecareapp.firebaseapp.com](https://structurecareapp.firebaseapp.com)
+
