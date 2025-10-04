@@ -1,0 +1,9 @@
+runtime: nodejs22
+
+build:
+  command: npm run build
+  output_dir: build
+
+run:
+  # serve the CRA build on the port App Hosting gives us
+  command: npx serve -s build -l $PORT
