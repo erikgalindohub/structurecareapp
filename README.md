@@ -23,14 +23,14 @@ A modern web app for managing and generating client-facing **softscape care guid
 ## Local Development
 
 ```bash
-# 1) Clone
+1) Clone
 git clone https://github.com/erikgalindohub/structurecareapp.git
 cd structurecareapp
 
-# 2) Install
+2) Install
 npm install
 
-# 3) Run dev server
+3) Run dev server
 npm start
 ````
 
