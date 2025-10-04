@@ -1,5 +1,3 @@
-Here you go — a **single copy-paste box** for your README:
-
 ````markdown
 # structurecareapp
 
