@@ -1,0 +1,5 @@
+{
+  "projects": {
+    "default": "projectdata-firebase"
+  }
+}
