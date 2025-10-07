@@ -1,24 +1,47 @@
 # StructureCare App
 
-## Quick Start
+## Quick Start (no prior experience needed)
 
-1. Copy `.env.example` to `.env` and fill in your Firebase web keys.
-2. Install dependencies: `npm install`
-3. Run locally: `npm start`
-4. Production build: `npm run build`
+1. **Install Node.js** if you do not have it yet (download from [nodejs.org](https://nodejs.org) – pick the LTS version).  
+2. **Clone or unzip this project** onto your machine.  
+3. Open a terminal in the project folder and run:
+   ```bash
+   npm install
+   ```
+   This pulls down the packages the app needs.
+4. Start the app locally:
+   ```bash
+   npm start
+   ```
+   Wait for the browser to open to `http://localhost:3000`.
 
-## Firebase Setup
+### When you’re ready to deploy or share with Firebase
 
-- Deploy security rules and indexes once you have Firebase CLI configured:
-  - `firebase deploy --only firestore:rules`
-  - `firebase deploy --only firestore:indexes`
-- Rules live in `firestore.rules` and lock writes to authenticated users while enforcing basic field validation.
-- Composite indexes for the project list query live in `firestore.indexes.json`.
+1. Copy the Firebase keys from the Firebase console (Project settings → Your apps → Web app).  
+2. Open this project’s `.env.example` file. Replace the placeholder text with your real keys and **save the file as `.env`** (keep `.env` out of source control).  
+3. Restart the dev server (`npm start`) so the app reads the new values.  
+4. To build the optimized version the host will serve, run:
+   ```bash
+   npm run build
+   ```
+   The output lives in the `build/` folder.
 
-## Data Sources
+### Optional Firebase extras (only if you’re using Firestore)
 
-- Plant data is loaded from the shared Google Sheet TSV. If the fetch fails, the list will be empty and an error logged to the console; refresh once connectivity returns.
-- Project data is stored in Firestore under the top-level `projects` collection shared by all anonymous-auth users.
+- The `firestore.rules` file tells Firebase who can read/write your data. Deploy it with:
+  ```bash
+  firebase deploy --only firestore:rules
+  ```
+- The `firestore.indexes.json` file makes the “filter by status and date” query fast. Deploy it with:
+  ```bash
+  firebase deploy --only firestore:indexes
+  ```
+  These two commands require the Firebase CLI (`npm install -g firebase-tools`) and `firebase login`.
+
+## Data sources
+
+- The plant catalog loads from a shared Google Sheet (published as TSV). If that sheet is down, the app shows an empty list and logs an error—refresh after the sheet comes back.
+- Client projects live in Cloud Firestore under the `projects` collection. Anonymous sign-in lets everyone on the team see the same data; security rules keep the shape of the data safe.
 
 # Getting Started with Create React App
 
