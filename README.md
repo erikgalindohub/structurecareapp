@@ -1,3 +1,25 @@
+# StructureCare App
+
+## Quick Start
+
+1. Copy `.env.example` to `.env` and fill in your Firebase web keys.
+2. Install dependencies: `npm install`
+3. Run locally: `npm start`
+4. Production build: `npm run build`
+
+## Firebase Setup
+
+- Deploy security rules and indexes once you have Firebase CLI configured:
+  - `firebase deploy --only firestore:rules`
+  - `firebase deploy --only firestore:indexes`
+- Rules live in `firestore.rules` and lock writes to authenticated users while enforcing basic field validation.
+- Composite indexes for the project list query live in `firestore.indexes.json`.
+
+## Data Sources
+
+- Plant data is loaded from the shared Google Sheet TSV. If the fetch fails, the list will be empty and an error logged to the console; refresh once connectivity returns.
+- Project data is stored in Firestore under the top-level `projects` collection shared by all anonymous-auth users.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

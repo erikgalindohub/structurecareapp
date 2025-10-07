@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{projectId} {
+      allow read: if request.auth != null;
+
+      allow create, update: if request.auth != null && isValidProject(request.resource.data);
+
+      allow delete: if false;
+    }
+
+    function isValidProject(data) {
+      return hasRequiredFields(data) &&
+        validStatus(data.status) &&
+        validZones(data.zones) &&
+        validPlants(data.plants) &&
+        validOptionalStrings(data) &&
+        validTimestamps(data);
+    }
+
+    function hasRequiredFields(data) {
+      return data.clientName is string &&
+        data.clientName.size() > 0 &&
+        data.clientEmail is string &&
+        data.clientEmail.size() > 0 &&
+        data.status is string &&
+        data.zones is list &&
+        data.plants is list;
+    }
+
+    function validStatus(status) {
+      return status in ['In Progress', 'Completed'];
+    }
+
+    function validZones(zones) {
+      return zones.size() <= 50 &&
+        zones.every(zone => zone is string && zone.size() > 0 && zone.size() <= 60);
+    }
+
+    function validPlants(plants) {
+      return plants.size() <= 200 &&
+        plants.every(plant =>
+          plant is map &&
+          plant.keys().hasAll(['id']) &&
+          plant.id is string &&
+          (!plant.keys().hasAny(['zones']) || (plant.zones is list && plant.zones.every(zone => zone is string))));
+    }
+
+    function validOptionalStrings(data) {
+      return (!('projectAddress' in data) || data.projectAddress is string) &&
+        (!('clientNotes' in data) || data.clientNotes is string) &&
+        (!('clientPhone' in data) || data.clientPhone is string);
+    }
+
+    function validTimestamps(data) {
+      return (!('dateCreated' in data) || data.dateCreated is timestamp) &&
+        (!('dateCompleted' in data) || data.dateCompleted == null || data.dateCompleted is timestamp);
+    }
+  }
+}
