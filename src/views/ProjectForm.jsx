@@ -56,14 +56,11 @@ const CustomAlert = ({ message, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white p-6 rounded-xl shadow-2xl max-w-sm w-full space-y-4">
+      <div className="brand-card max-w-sm w-full space-y-4 p-6">
         <p className="text-lg font-medium text-red-600">Error</p>
         <p className="text-stone-700">{message}</p>
-        <button
-          onClick={onClose}
-          className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition"
-        >
-          Close
+        <button onClick={onClose} className="brand-button brand-button--accent w-full py-3">
+          <span>Close</span>
         </button>
       </div>
     </div>
@@ -124,7 +121,7 @@ const PlantDetailModal = ({ plant, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 transition duration-300">
-      <div className="bg-white w-full max-w-2xl max-h-[90vh] rounded-lg shadow-2xl overflow-y-auto transform scale-100">
+      <div className="brand-card w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-100">
         <div className="p-6 lg:p-8">
           <header className="flex justify-between items-start pb-4 border-b border-stone-200">
             <div>
@@ -590,21 +587,24 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
         <PlantDetailModal plant={selectedPlantDetails} onClose={() => setSelectedPlantDetails(null)} />
       )}
 
-      <div className="p-8 lg:p-12 bg-stone-50 min-h-screen max-w-6xl mx-auto">
+      <div className="p-8 lg:p-12 brand-background min-h-screen max-w-6xl mx-auto">
         {!isOnline && <OfflineBanner />}
 
-        <h1 className="text-3xl font-extrabold text-emerald-800 mb-6">
-          {isNew ? 'New Client Project Setup' : `Editing: ${project.clientName}`}
-        </h1>
+        <div className="flex flex-col gap-2 mb-6">
+          <span className="brand-eyebrow">{isNew ? 'New Project' : 'Project Update'}</span>
+          <h1 className="text-3xl font-extrabold text-emerald-700">
+            {isNew ? 'New Client Project Setup' : `Editing: ${project.clientName}`}
+          </h1>
+        </div>
 
         <button
           onClick={() => setView({ name: 'ProjectList', status: project.status })}
-          className="mb-6 text-sm text-stone-600 hover:text-emerald-700 transition"
+          className="mb-6 text-sm font-semibold text-emerald-700 hover:text-emerald-600 transition"
         >
           &larr; Back to {project.status === 'Completed' ? 'Completed' : 'Current'} Projects
         </button>
 
-        <div className="bg-white p-6 rounded-xl shadow-lg mb-8 border-l-4 border-yellow-600">
+        <div className="brand-card mb-8 border-l-4 border-yellow-600 p-6 md:p-8">
           <h2 className="text-xl font-semibold text-stone-700 mb-4">Client Details & Notes</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
             <input
@@ -614,7 +614,7 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
               value={project.clientName}
               onChange={handleChange}
               required
-              className="p-3 border rounded-lg"
+              className="form-input"
               disabled={isComplete}
             />
             <input
@@ -624,7 +624,7 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
               value={project.clientEmail}
               onChange={handleChange}
               required
-              className="p-3 border rounded-lg"
+              className="form-input"
               disabled={isComplete}
             />
             <input
@@ -633,7 +633,7 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
               placeholder="Client Phone"
               value={project.clientPhone}
               onChange={handleChange}
-              className="p-3 border rounded-lg"
+              className="form-input"
               disabled={isComplete}
             />
             <input
@@ -642,7 +642,7 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
               placeholder="Project Address"
               value={project.projectAddress}
               onChange={handleChange}
-              className="p-3 border rounded-lg"
+              className="form-input"
               disabled={isComplete}
             />
           </div>
@@ -652,12 +652,12 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
             value={project.clientNotes}
             onChange={handleChange}
             rows="3"
-            className="w-full p-3 border rounded-lg resize-none"
+            className="form-input resize-none"
             disabled={isComplete}
           />
         </div>
 
-        <div className="bg-white p-6 rounded-xl shadow-lg mb-8 border-l-4 border-emerald-600">
+        <div className="brand-card mb-8 border-l-4 border-emerald-600 p-6 md:p-8">
           <h2 className="text-xl font-semibold text-stone-700 mb-4">Plant Selection Checklist</h2>
 
           <div className="mb-4 space-y-2">
@@ -669,12 +669,12 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
                 value={zoneInput}
                 onChange={(event) => setZoneInput(event.target.value)}
                 onKeyDown={handleZoneInputKeyDown}
-                className="flex-1 p-3 border rounded-l-lg"
+                className="form-input flex-1 rounded-r-none"
                 disabled={isComplete}
               />
               <button
                 onClick={() => addZone(zoneInput)}
-                className="bg-yellow-500 text-white p-3 rounded-r-lg hover:bg-yellow-600 transition disabled:opacity-50 flex items-center justify-center"
+                className="bg-yellow-500 text-white p-3 rounded-l-none rounded-r-lg hover:bg-yellow-600 transition disabled:opacity-50 flex items-center justify-center"
                 disabled={isComplete || !zoneInput.trim()}
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -778,7 +778,7 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
-              className="flex-1 p-3 border rounded-lg"
+              className="form-input flex-1"
               disabled={isComplete}
             />
           </div>
@@ -851,27 +851,27 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
           <button
             onClick={() => saveProject(project.status)}
             disabled={isSaving || isComplete || !isOnline}
-            className="flex-1 bg-sky-600 text-white font-bold py-3 rounded-lg hover:bg-sky-700 transition disabled:opacity-50"
+            className="brand-button brand-button--accent flex-1 w-full py-3 disabled:opacity-50"
           >
-            {isSaving ? 'Saving...' : 'Save Progress'}
+            <span>{isSaving ? 'Saving...' : 'Save Progress'}</span>
           </button>
 
           {!isComplete && (
             <button
               onClick={() => saveProject('Completed')}
               disabled={isSaving || project.plants.length === 0 || !isOnline}
-              className="flex-1 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition shadow-xl disabled:opacity-50"
+              className="brand-button flex-1 w-full py-3 disabled:opacity-50"
             >
-              Finalize & Complete Project ({project.plants.length} plants)
+              <span>Finalize & Complete Project ({project.plants.length} plants)</span>
             </button>
           )}
 
           {isComplete && (
             <button
               onClick={handleGeneratePDF}
-              className="flex-1 bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition shadow-xl"
+              className="brand-button brand-button--accent flex-1 w-full py-3"
             >
-              Generate Final Client PDF 📄
+              <span>Generate Final Client PDF 📄</span>
             </button>
           )}
         </div>

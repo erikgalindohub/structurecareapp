@@ -43,32 +43,35 @@ const ProjectList = ({ db, setView, status }) => {
   );
 
   return (
-    <div className="p-8 lg:p-12 bg-stone-50 min-h-screen">
-      <h1 className="text-3xl font-extrabold text-emerald-800 mb-6">
-        {status === 'In Progress' ? 'Current Projects' : 'Completed Projects'}
-      </h1>
+    <div className="p-8 lg:p-12 brand-background min-h-screen">
+      <div className="flex flex-col gap-2 mb-6">
+        <span className="brand-eyebrow">{status === 'In Progress' ? 'Active Portfolio' : 'Archive'}</span>
+        <h1 className="text-3xl font-extrabold text-emerald-700">
+          {status === 'In Progress' ? 'Current Projects' : 'Completed Projects'}
+        </h1>
+      </div>
 
       <button
         onClick={() => setView({ name: 'Dashboard' })}
-        className="mb-6 text-sm text-stone-600 hover:text-emerald-700 transition"
+        className="mb-6 text-sm font-semibold text-emerald-700 hover:text-emerald-600 transition"
       >
         &larr; Back to Dashboard
       </button>
 
-      <div className="mb-6">
+      <div className="mb-8">
         <input
           type="text"
           placeholder="Search by Client Name, Phone, or Email..."
           value={searchQuery}
           onChange={(event) => setSearchQuery(event.target.value)}
-          className="w-full p-3 border border-stone-300 rounded-lg focus:ring-emerald-700 focus:border-emerald-700 transition"
+          className="w-full p-4 bg-white border border-stone-200 rounded-lg shadow-md focus:border-emerald-600 transition"
         />
       </div>
 
       {isLoading && <p className="text-stone-500">Loading projects...</p>}
 
       {!isLoading && filteredProjects.length === 0 && (
-        <div className="p-8 bg-white rounded-lg shadow-inner text-center text-stone-500">
+        <div className="brand-card p-8 text-center text-stone-500">
           No {status.toLowerCase()} projects found.
         </div>
       )}
@@ -77,25 +80,26 @@ const ProjectList = ({ db, setView, status }) => {
         {filteredProjects.map((project) => (
           <div
             key={project.id}
-            className="bg-white p-6 rounded-xl shadow-md border border-stone-200 flex justify-between items-center hover:shadow-lg transition"
+            className="brand-card p-6 md:p-7 flex flex-col md:flex-row md:items-center md:justify-between gap-4 transition hover:shadow-lg"
           >
             <div>
               <h2 className="text-xl font-bold text-emerald-700">{project.clientName}</h2>
               <p className="text-sm text-stone-600 mt-1">
-                <span className="font-medium">Job:</span> {project.projectAddress || 'Address not set'}
+                <span className="font-medium text-stone-700">Job:</span>{' '}
+                {project.projectAddress || 'Address not set'}
               </p>
-              <p className="text-xs text-stone-400">
+              <p className="text-xs text-stone-500">
                 Started: {project.dateCreated ? project.dateCreated.toLocaleDateString() : 'N/A'}
               </p>
             </div>
-            <div className="flex space-x-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
               <button
                 onClick={() =>
                   setView({ name: 'ProjectForm', projectId: project.id, projectData: project })
                 }
-                className="bg-emerald-500 text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-emerald-600 transition shadow-md"
+                className="brand-button w-full sm:w-auto py-3 px-6"
               >
-                {status === 'In Progress' ? 'Edit Checklist' : 'View Report'}
+                <span>{status === 'In Progress' ? 'Edit Checklist' : 'View Report'}</span>
               </button>
             </div>
           </div>

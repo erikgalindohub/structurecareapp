@@ -1,32 +1,38 @@
 const Dashboard = ({ setView }) => (
-  <div className="flex flex-col items-center justify-center min-h-screen p-8 bg-stone-100">
-    <div className="w-full max-w-lg p-10 bg-white rounded-xl shadow-2xl border-t-4 border-emerald-600 space-y-6">
-      <h1 className="text-3xl font-extrabold text-emerald-800 text-center">Project Documentation Hub</h1>
-      <p className="text-stone-500 text-center">
-        Manage client projects efficiently for professional documentation.
+  <div className="flex flex-col items-center justify-center min-h-screen p-8 md:p-12 brand-background">
+    <div className="brand-card brand-card--accent w-full max-w-xl space-y-7 text-center">
+      <span className="brand-eyebrow">Structure Landscapes</span>
+      <h1 className="text-3xl md:text-4xl font-extrabold text-emerald-700">
+        Project Documentation Hub
+      </h1>
+      <p className="text-stone-600">
+        Manage client projects efficiently and deliver polished documentation that mirrors your
+        field-ready brand.
       </p>
 
-      <div className="space-y-4 pt-4">
+      <div className="space-y-4 pt-6">
         <button
           onClick={() => setView({ name: 'NewProjectForm', projectId: null })}
-          className="w-full bg-emerald-700 text-white font-bold py-4 rounded-lg text-lg shadow-lg hover:bg-emerald-800 transition"
+          className="brand-button w-full"
         >
-          + New Project
+          <span>+ New Project</span>
         </button>
         <button
           onClick={() => setView({ name: 'ProjectList', status: 'In Progress' })}
-          className="w-full bg-yellow-600 text-white font-bold py-4 rounded-lg text-lg shadow-lg hover:bg-yellow-700 transition"
+          className="brand-button brand-button--accent w-full"
         >
-          Current Projects
+          <span>Current Projects</span>
         </button>
         <button
           onClick={() => setView({ name: 'ProjectList', status: 'Completed' })}
-          className="w-full bg-gray-600 text-white font-bold py-4 rounded-lg text-lg shadow-lg hover:bg-gray-700 transition"
+          className="brand-button brand-button--neutral w-full"
         >
-          Completed Projects
+          <span>Completed Projects</span>
         </button>
       </div>
-      <p className="text-xs text-stone-400 text-center pt-4">Data is securely stored via Firebase Firestore.</p>
+      <p className="text-xs text-stone-500 text-center pt-4">
+        Data is securely stored via Firebase Firestore.
+      </p>
     </div>
   </div>
 );
