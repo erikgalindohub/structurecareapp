@@ -2,12 +2,10 @@ const Dashboard = ({ setView }) => (
   <div className="flex flex-col items-center justify-center min-h-screen p-8 md:p-12 brand-background">
     <div className="brand-card brand-card--accent w-full max-w-3xl space-y-7 md:space-y-8 p-8 md:p-12 text-left">
       <span className="brand-eyebrow">Structure Landscapes</span>
-      <h1 className="brand-heading text-emerald-700">
-        Let&apos;s Build The Landscape Of Your Dreams.
-      </h1>
+      <h1 className="brand-heading text-emerald-700">Build the Landscape Report of Your Dreams.</h1>
       <p className="brand-subtext max-w-xl">
-        Manage client projects efficiently and deliver polished documentation that mirrors your
-        field-ready brand.
+        Capture every detail from scouting through sign-off so you can craft polished, client-ready
+        documentation in minutes.
       </p>
 
       <ul className="space-y-3 text-stone-700 font-medium">
@@ -15,20 +13,20 @@ const Dashboard = ({ setView }) => (
           <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm">
             ✓
           </span>
-          Locally curated plant database and project records.
+          Locally curated plant database, checklist tooling, and project records.
         </li>
         <li className="flex items-center gap-3">
           <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm">
             ✓
           </span>
-          Client-ready deliverables in minutes.
+          Auto-generated care guides that delight clients and crews.
         </li>
       </ul>
 
       <div className="flex flex-col sm:flex-row gap-4 pt-4">
         <button
           onClick={() => setView({ name: 'NewProjectForm', projectId: null })}
-          className="brand-button w-full"
+          className="brand-button brand-button--reverse w-full"
         >
           + New Project
         </button>
@@ -40,7 +38,7 @@ const Dashboard = ({ setView }) => (
         </button>
         <button
           onClick={() => setView({ name: 'ProjectList', status: 'Completed' })}
-          className="brand-button brand-button--neutral w-full"
+          className="brand-button brand-button--neutral brand-button--reverse w-full"
         >
           Completed Projects
         </button>

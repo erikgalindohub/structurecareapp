@@ -10,6 +10,7 @@ import { Timestamp, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { PLACEHOLDER_BASE } from '../constants';
 import { getProjectsCollectionRef } from '../firebase';
 import useProjectState from '../hooks/useProjectState';
+import generateClientGuideHTML from '../utils/generateClientGuide';
 
 const PRIMARY_FILTERS = [
   {
@@ -48,6 +49,14 @@ const PRIMARY_FILTERS = [
     ],
   },
 ];
+
+const BUSINESS_DETAILS = {
+  name: 'Structure Landscapes',
+  location: 'Austin, Texas',
+  tagline: 'Structure Landscapes – Austin, Texas',
+  phone: '',
+  website: 'structurelandscapes.com',
+};
 
 const CustomAlert = ({ message, onClose }) => {
   if (!message) {
@@ -575,7 +584,46 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
       setAlertMessage('Please select plants before attempting to generate the report.');
       return;
     }
-    setAlertMessage('PDF Generation is on hold! But your plant list is locked in for the report.');
+
+    if (typeof window === 'undefined') {
+      setAlertMessage('PDF generation is only available in the browser.');
+      return;
+    }
+
+    const reportWindow = window.open('', '_blank');
+    if (!reportWindow) {
+      setAlertMessage('Please allow pop-ups to generate the PDF.');
+      return;
+    }
+
+    reportWindow.opener = null;
+
+    const html = generateClientGuideHTML({
+      project,
+      businessDetails: BUSINESS_DETAILS,
+    });
+
+    reportWindow.document.open();
+    reportWindow.document.write(html);
+    reportWindow.document.close();
+
+    const finish = () => {
+      try {
+        reportWindow.focus();
+        reportWindow.print();
+      } catch (error) {
+        console.error('Error triggering print:', error);
+      }
+    };
+
+    const readyState = reportWindow.document.readyState;
+    if (readyState === 'complete' || readyState === 'interactive') {
+      setTimeout(finish, 150);
+    } else {
+      reportWindow.document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(finish, 100);
+      });
+    }
   };
 
   const isAnyFilterActive = searchTerm || filterCategory || filterValue || filterZone;

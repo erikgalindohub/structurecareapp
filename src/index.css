@@ -10,6 +10,7 @@
   --brand-charcoal: #1f2124;
   --brand-grey: #58595c;
   --brand-muted: #4d4d4d;
+  --brand-forest: #1f5b38;
 
   --emerald-900: var(--brand-primary-deep);
   --emerald-800: #065b10;
@@ -161,61 +162,111 @@ button:focus-visible {
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: 0.01em;
-  color: var(--white);
-  background: var(--brand-primary);
-  border: 2px solid var(--brand-primary);
   border-radius: 12px;
+  border: 2px solid var(--brand-primary);
+  color: var(--white);
+  background: var(--brand-surface);
   box-shadow: 0 14px 22px rgba(7, 104, 14, 0.18);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  transition: color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
+  --button-scale-default: 1;
+  --button-scale-hover: 0;
+  --button-origin-default: left;
+  --button-origin-hover: right;
+}
+
+.brand-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--brand-primary);
+  transform: scaleX(var(--button-scale-default));
+  transform-origin: var(--button-origin-default);
+  transition: transform 0.45s ease;
+  z-index: -1;
 }
 
 .brand-button:hover {
-  background: var(--brand-primary-dark);
-  border-color: var(--brand-primary-dark);
+  color: var(--brand-primary);
+  border-color: var(--brand-primary);
   transform: translateY(-1px);
   box-shadow: 0 18px 28px rgba(7, 104, 14, 0.22);
 }
 
+.brand-button:hover::before {
+  transform: scaleX(var(--button-scale-hover));
+  transform-origin: var(--button-origin-hover);
+}
+
 .brand-button:active {
   transform: translateY(0);
-  box-shadow: 0 10px 18px rgba(7, 104, 14, 0.18);
+  box-shadow: 0 12px 20px rgba(7, 104, 14, 0.18);
 }
 
 .brand-button--accent {
-  background: var(--brand-accent);
   border-color: var(--brand-accent);
   color: var(--brand-charcoal);
   box-shadow: 0 14px 24px rgba(128, 204, 40, 0.22);
 }
 
+.brand-button--accent::before {
+  background: var(--brand-accent);
+}
+
 .brand-button--accent:hover {
-  background: var(--brand-accent-strong);
+  color: var(--brand-charcoal);
   border-color: var(--brand-accent-strong);
 }
 
+.brand-button--accent:hover::before {
+  transform: scaleX(0);
+}
+
 .brand-button--outline {
-  background: transparent;
-  color: var(--brand-charcoal);
-  border-color: rgba(31, 33, 36, 0.9);
+  border-color: var(--brand-forest);
+  color: var(--brand-forest);
+  background: rgba(31, 91, 56, 0.1);
   box-shadow: none;
+  --button-scale-default: 0;
+  --button-scale-hover: 1;
+  --button-origin-default: left;
+  --button-origin-hover: left;
+}
+
+.brand-button--outline::before {
+  background: var(--brand-forest);
 }
 
 .brand-button--outline:hover {
-  background: rgba(227, 239, 214, 0.4);
-  color: var(--brand-primary-dark);
-  box-shadow: 0 8px 16px rgba(31, 33, 36, 0.12);
+  color: var(--white);
+  border-color: var(--brand-forest);
+  box-shadow: 0 14px 24px rgba(31, 91, 56, 0.22);
 }
 
 .brand-button--neutral {
-  background: #33373d;
   border-color: #33373d;
   color: var(--white);
   box-shadow: 0 16px 26px rgba(31, 33, 36, 0.22);
 }
 
+.brand-button--neutral::before {
+  background: #33373d;
+}
+
 .brand-button--neutral:hover {
-  background: #1f2124;
-  border-color: #1f2124;
+  color: #33373d;
+  border-color: #33373d;
+}
+
+.brand-button--neutral:hover::before {
+  transform: scaleX(0);
+}
+
+.brand-button--reverse {
+  --button-origin-default: right;
+  --button-origin-hover: left;
 }
 
 .brand-button--link {
@@ -224,6 +275,10 @@ button:focus-visible {
   color: var(--brand-primary);
   box-shadow: none;
   padding: 0;
+}
+
+.brand-button--link::before {
+  display: none;
 }
 
 .brand-button--link:hover {
