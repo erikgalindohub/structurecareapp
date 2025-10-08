@@ -59,8 +59,8 @@ const CustomAlert = ({ message, onClose }) => {
       <div className="brand-card max-w-sm w-full space-y-4 p-6">
         <p className="text-lg font-medium text-red-600">Error</p>
         <p className="text-stone-700">{message}</p>
-        <button onClick={onClose} className="brand-button brand-button--accent w-full py-3">
-          <span>Close</span>
+        <button onClick={onClose} className="brand-button brand-button--accent w-full">
+          Close
         </button>
       </div>
     </div>
@@ -851,27 +851,27 @@ const ProjectForm = ({ db, setView, projectId, projectData, dbPlants, isLoadingP
           <button
             onClick={() => saveProject(project.status)}
             disabled={isSaving || isComplete || !isOnline}
-            className="brand-button brand-button--accent flex-1 w-full py-3 disabled:opacity-50"
+            className="brand-button brand-button--accent flex-1 w-full disabled:opacity-50"
           >
-            <span>{isSaving ? 'Saving...' : 'Save Progress'}</span>
+            {isSaving ? 'Saving...' : 'Save Progress'}
           </button>
 
           {!isComplete && (
             <button
               onClick={() => saveProject('Completed')}
               disabled={isSaving || project.plants.length === 0 || !isOnline}
-              className="brand-button flex-1 w-full py-3 disabled:opacity-50"
+              className="brand-button flex-1 w-full disabled:opacity-50"
             >
-              <span>Finalize & Complete Project ({project.plants.length} plants)</span>
+              Finalize &amp; Complete Project ({project.plants.length} plants)
             </button>
           )}
 
           {isComplete && (
             <button
               onClick={handleGeneratePDF}
-              className="brand-button brand-button--accent flex-1 w-full py-3"
+              className="brand-button brand-button--accent flex-1 w-full"
             >
-              <span>Generate Final Client PDF 📄</span>
+              Generate Final Client PDF 📄
             </button>
           )}
         </div>

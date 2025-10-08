@@ -97,9 +97,9 @@ const ProjectList = ({ db, setView, status }) => {
                 onClick={() =>
                   setView({ name: 'ProjectForm', projectId: project.id, projectData: project })
                 }
-                className="brand-button w-full sm:w-auto py-3 px-6"
+                className="brand-button w-full sm:w-auto"
               >
-                <span>{status === 'In Progress' ? 'Edit Checklist' : 'View Report'}</span>
+                {status === 'In Progress' ? 'Edit Checklist' : 'View Report'}
               </button>
             </div>
           </div>
