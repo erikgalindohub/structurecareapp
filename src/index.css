@@ -224,27 +224,6 @@ button:focus-visible {
   transform: scaleX(0);
 }
 
-.brand-button--outline {
-  border-color: var(--brand-forest);
-  color: var(--brand-forest);
-  background: rgba(31, 91, 56, 0.1);
-  box-shadow: none;
-  --button-scale-default: 0;
-  --button-scale-hover: 1;
-  --button-origin-default: left;
-  --button-origin-hover: left;
-}
-
-.brand-button--outline::before {
-  background: var(--brand-forest);
-}
-
-.brand-button--outline:hover {
-  color: var(--white);
-  border-color: var(--brand-forest);
-  box-shadow: 0 14px 24px rgba(31, 91, 56, 0.22);
-}
-
 .brand-button--neutral {
   border-color: #33373d;
   color: var(--white);

@@ -1,14 +1,14 @@
 const Dashboard = ({ setView }) => (
-  <div className="flex flex-col items-center justify-center min-h-screen p-8 md:p-12 brand-background">
-    <div className="brand-card brand-card--accent w-full max-w-3xl space-y-7 md:space-y-8 p-8 md:p-12 text-left">
-      <span className="brand-eyebrow">Structure Landscapes</span>
-      <h1 className="brand-heading text-emerald-700">Build the Landscape Report of Your Dreams.</h1>
-      <p className="brand-subtext max-w-xl">
-        Capture every detail from scouting through sign-off so you can craft polished, client-ready
-        documentation in minutes.
+  <div className="min-h-screen w-full bg-white flex items-start justify-center p-8 md:p-16">
+    <div className="w-full max-w-4xl space-y-7 md:space-y-8 text-left">
+      <span className="brand-eyebrow text-stone-700">Structure Landscapes</span>
+      <h1 className="brand-heading text-stone-900">Build the Landscape Report of Your Dreams.</h1>
+      <p className="text-stone-900 font-medium max-w-2xl">
+        StructureCare keeps every site note, plant pick, and photo organized so you can assemble
+        polished maintenance packets in just a few clicks.
       </p>
 
-      <ul className="space-y-3 text-stone-700 font-medium">
+      <ul className="space-y-3 text-stone-800 font-medium">
         <li className="flex items-center gap-3">
           <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm">
             ✓
@@ -32,7 +32,7 @@ const Dashboard = ({ setView }) => (
         </button>
         <button
           onClick={() => setView({ name: 'ProjectList', status: 'In Progress' })}
-          className="brand-button brand-button--outline w-full"
+          className="brand-button w-full"
         >
           View Current Projects
         </button>
