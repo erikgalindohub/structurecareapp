@@ -1,6 +1,6 @@
 // src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { collection, getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
@@ -21,6 +21,11 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+
+// Google provider with Workspace domain hint
+export const googleProvider = new GoogleAuthProvider();
+// Hint Google to prefer the company domain in the account chooser.
+googleProvider.setCustomParameters({ hd: 'structurelandscapes.com', prompt: 'select_account' });
 
 export const getProjectsCollectionRef = (database = db) =>
   database ? collection(database, "projects") : null;
