@@ -22,10 +22,8 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-// Google provider with Workspace domain hint
+// Google provider used throughout the app.
 export const googleProvider = new GoogleAuthProvider();
-// Hint Google to prefer the company domain in the account chooser.
-googleProvider.setCustomParameters({ hd: 'structurelandscapes.com', prompt: 'select_account' });
 
 export const getProjectsCollectionRef = (database = db) =>
   database ? collection(database, "projects") : null;

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useFirebase from './hooks/useFirebase';
 import usePlantData from './hooks/usePlantData';
 import useAuth from './hooks/useAuth';
@@ -9,8 +9,12 @@ import ProjectForm from './views/ProjectForm';
 const App = () => {
   const { db, isReady } = useFirebase();
   const { dbPlants, isLoading } = usePlantData();
-  const { user, loading: authLoading, error, signIn, signOut } = useAuth();
+  const { user, loading: authLoading, error, lastEmail, signIn } = useAuth();
   const [view, setView] = useState({ name: 'Dashboard' });
+
+  useEffect(() => {
+    document.title = 'Care - Structure Landscapes';
+  }, []);
 
   if (!isReady || isLoading || authLoading) {
     return (
@@ -33,6 +37,11 @@ const App = () => {
             <div className="text-red-600 text-sm" role="alert">
               {error}
             </div>
+          )}
+          {lastEmail && (
+            <button onClick={signIn} className="brand-button brand-button--reverse w-full">
+              Continue as {lastEmail}
+            </button>
           )}
           <button onClick={signIn} className="brand-button w-full">
             Sign in with Google

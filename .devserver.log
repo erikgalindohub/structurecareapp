@@ -1,0 +1,11 @@
+
+> projectdata-app@0.1.0 start
+> react-scripts start
+
+Attempting to bind to HOST environment variable: 127.0.0.1
+If this was unintentional, check that you haven't mistakenly set it in your shell.
+Learn more here: https://cra.link/advanced-config
+
+Could not find an open port at 127.0.0.1.
+Network error message: listen EPERM: operation not permitted 127.0.0.1
+

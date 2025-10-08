@@ -3,12 +3,12 @@ const Dashboard = ({ setView }) => (
     <div className="w-full max-w-4xl space-y-7 md:space-y-8 text-left">
       <span className="brand-eyebrow text-stone-700">Structure Landscapes</span>
       <h1 className="brand-heading text-stone-900">Build the Landscape Report of Your Dreams.</h1>
-      <p className="text-stone-900 font-medium max-w-2xl">
+      <p className="text-lg text-stone-900 font-medium max-w-2xl">
         StructureCare keeps every site note, plant pick, and photo organized so you can assemble
         polished maintenance packets in just a few clicks.
       </p>
 
-      <ul className="space-y-3 text-stone-800 font-medium">
+      <ul className="space-y-3 text-stone-800 font-medium text-base">
         <li className="flex items-center gap-3">
           <span className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-sm">
             ✓

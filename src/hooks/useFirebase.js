@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { signInAnonymously, onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '../firebase';
 
 const useFirebase = () => {
@@ -8,27 +8,12 @@ const useFirebase = () => {
   useEffect(() => {
     let isMounted = true;
 
-    const ensureAuth = async () => {
-      try {
-        await signInAnonymously(auth);
-      } catch (error) {
-        console.error('Firebase Auth failed during initial sign-in:', error);
-      }
-    };
-
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, () => {
       if (!isMounted) {
         return;
       }
-
-      if (user) {
-        setIsReady(true);
-      } else {
-        ensureAuth();
-      }
+      setIsReady(true);
     });
-
-    ensureAuth();
 
     return () => {
       isMounted = false;
